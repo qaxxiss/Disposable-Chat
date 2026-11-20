@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="A simple, temporary private chat for two people." />
+  <title>AfterTalk — Temporary Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar"><a class="brand" href="/"><span class="brand-mark">a.</span><span>aftertalk</span></a><div class="top-right"><span class="live-dot"></span><span>Temporary by design</span></div></header>
+  <main class="shell">
+    <section id="home" class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> TWO PEOPLE. ONE PRIVATE SPACE.</div>
+      <h1>Some things are<br><span>better said</span> privately.</h1>
+      <p class="lead">A quiet place for a conversation. No accounts, no history to keep. Just share a code and talk.</p>
+      <div class="action-grid">
+        <article class="action-card primary-card"><div class="card-icon">↗</div><h2>Start a new room</h2><p>Create a private space and invite one person.</p><button id="createBtn" class="btn btn-primary">Create room <span>→</span></button></article>
+        <article class="action-card"><div class="card-icon secondary-icon">⌁</div><h2>Join a room</h2><p>Already have a code? Enter it to join.</p><form id="joinForm"><input id="roomCode" maxlength="8" placeholder="ENTER ROOM CODE" autocomplete="off" aria-label="Room code" /><button class="btn btn-secondary" type="submit">Join room <span>→</span></button></form></article>
+      </div>
+      <div class="privacy-row"><span>◈</span> No sign-up <i></i> Only 2 participants <i></i> Auto-expires in 1 hour</div>
+    </section>
+    <section id="namePanel" class="panel hidden">
+      <button class="back-link" id="backHome">← Back</button><div class="eyebrow">ONE LAST THING</div><h2>What should we<br><span>call you?</span></h2><p class="muted">Choose a temporary name for this conversation.</p>
+      <form id="nameForm"><label for="nickname">YOUR DISPLAY NAME</label><input id="nickname" maxlength="24" placeholder="e.g. Alex" required /><button class="btn btn-primary full">Enter conversation <span>→</span></button></form>
+    </section>
+    <section id="chatPanel" class="chat-panel hidden">
+      <div class="chat-head"><div><div class="eyebrow">YOUR PRIVATE SPACE</div><h2>Room <span id="roomLabel"></span></h2><p id="roomStatus" class="muted small">Waiting for someone to join…</p></div><button id="leaveBtn" class="leave-btn">Leave room ↗</button></div>
+      <div class="invite"><div><span class="invite-label">SHARE THIS CODE</span><strong id="shareCode"></strong></div><button id="copyBtn" class="copy-btn">Copy code</button></div>
+      <div class="timer-row"><span class="timer-icon">◷</span><span>This room disappears in</span><strong id="countdown">60:00</strong></div>
+      <div id="messages" class="messages"><div class="empty-chat"><div>✳</div><strong>Your conversation starts here.</strong><span>Send the room code to one person to begin.</span></div></div>
+      <form id="messageForm" class="composer"><input id="messageInput" maxlength="2000" placeholder="Write a message…" autocomplete="off" aria-label="Message" /><button class="send-btn" aria-label="Send message">↑</button></form>
+      <div class="chat-foot">Messages are automatically deleted when this room expires.</div>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+  </main>
+  <footer><span>AFTERTALK © 2026</span><span>Made for conversations that don't need to stay.</span></footer>
+</body>
+</html>
